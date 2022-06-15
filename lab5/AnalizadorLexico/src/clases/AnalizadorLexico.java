@@ -1,8 +1,5 @@
 package clases;
 
-
-import java.util.ArrayList;
-
 import vistas.Vista;
 
 /**
