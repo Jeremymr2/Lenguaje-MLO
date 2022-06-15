@@ -126,6 +126,7 @@ public class AnalizadorLexico {
                     case 1 -> {     //LETRA
                         if (Character.isLetterOrDigit(car)) {
                             tipo = 1;
+                            if(isReservada(lexema)) return tokenList.getToken().get(lexema);
                             addLexema();
                             indice++;
                         } else if (car == ' ') {
@@ -146,6 +147,7 @@ public class AnalizadorLexico {
                             tipo = 2;
                             addLexema();
                             indice++;
+                            if(nextCar == '.' && !entero) return 1004;
                         } else if (car == ' ') {
                             indice++;
                             if (entero) return 1003;
@@ -158,7 +160,10 @@ public class AnalizadorLexico {
                         } else if (isSimbolo(car)){
                             if (entero) return 1003;
                             else return 1004;
-                        } else{
+                        } else if (Character.isLetter(car)){
+                            if (entero) return 1003;
+                            else return 1004;
+                        }  else{
                             return 911;
                         }
                     }
@@ -201,7 +206,7 @@ public class AnalizadorLexico {
         System.out.println(token + " " + descripcion.get(token) + " " + lexema);
         Registro r = new Registro(token, descripcion.get(token), lexema);
         arrayRegistros.registros.add(r);
-        if (isSimbolo(lexema.charAt(0))) arrayRegistros.simbolos.add(r);
+        if (!isSimbolo(lexema.charAt(0)) && !isReservada(lexema)) arrayRegistros.simbolos.add(r);
     }
 
     //Método que verifica si la palabra pertenece al arreglo de palabras reservadas

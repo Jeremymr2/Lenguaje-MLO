@@ -6,7 +6,7 @@ public class Tokens {
     HashMap<Integer, String> token = new HashMap<Integer, String>();
     String [] reservadas = {"yes","main","loop","whyle","yesnot","write","read"  //Arreglo de palabras reservadas
     ,"class","ent","real","bul","chrct","bond","return","new","void"};
-    String [] simbolos = {"+","-","*","/","\\",";","=",">","<","<=",">=","==","!"   //Arreglo de símbolos
+    String [] simbolos = {"+","-","*","/","\\",":","=",">","<","<=",">=","==","!"   //Arreglo de símbolos
     ,"!=","++","--","{","}","[","]","@","_","\"",".","(",")","$","|","&",",",";","'"};
     HashMap<String,Integer> tokenLexema = new HashMap<>();  //HashMap para guardar tokens por lexema
 
