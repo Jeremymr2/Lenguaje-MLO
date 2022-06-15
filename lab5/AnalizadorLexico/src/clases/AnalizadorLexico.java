@@ -80,7 +80,40 @@ public class AnalizadorLexico {
                                     indice++;
                                     return tokenList.getToken().get(String.valueOf(car));
                                 }
-                            }else{
+                            } else if(car == '+'){
+                                if (nextCar=='+'){
+                                    indice++;
+                                    addLexema();
+                                    indice++;
+                                    return 214;
+                                } else {
+                                    indice++;
+                                    return tokenList.getToken().get(String.valueOf(car));
+                                }
+                            } else if(car == '-'){
+                                if (nextCar=='-'){
+                                    indice++;
+                                    addLexema();
+                                    indice++;
+                                    return 215;
+                                } else {
+                                    indice++;
+                                    return tokenList.getToken().get(String.valueOf(car));
+                                }
+                            } else if(car == '<' || car == '>' || car == '=' || car == '!'){
+                                if (nextCar=='='){
+                                    indice++;
+                                    addLexema();
+                                    indice++;
+                                    if(car == '<') return 209;
+                                    else if (car == '>') return 210;
+                                    else if (car == '=') return 211; 
+                                    else return 213;
+                                } else {
+                                    indice++;
+                                    return tokenList.getToken().get(String.valueOf(car));
+                                }
+                            } else{
                                 indice++;
                                 return tokenList.getToken().get(String.valueOf(car));
                             }
