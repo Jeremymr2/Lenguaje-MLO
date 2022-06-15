@@ -305,12 +305,9 @@ public class Vista extends javax.swing.JFrame {
         limpiarTablaAll();
         
         cadena = tpCadena.getText();
-        System.out.println(cadena);
         cadena = cadena.trim();
         cadena = cadena.replaceAll("\\s{2,}", " ");
-        System.out.println(cadena);
         cadena = cadena.replace("\n", " ");
-        System.out.println(cadena);
         if (cadena == "") {JOptionPane.showMessageDialog(null,"No hay datos que analizar","Error",JOptionPane.ERROR_MESSAGE);}
         else {
             AnalizadorLexico lex = new AnalizadorLexico(cadena);

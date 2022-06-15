@@ -30,7 +30,6 @@ public class AnalizadorLexico {
         indiceLexema = 0;//Iterador del lexema
         for (;;) {
             car = cadena.charAt(indice);
-            System.out.println("caracter"+car);
             if(car!='#') nextCar = cadena.charAt(indice+1);
 
             if (car == '#' && indiceLexema == 0){   //Verifica si hay un # al inicio de la cadena
@@ -144,7 +143,6 @@ public class AnalizadorLexico {
         cadena += '#';          //Concatenando caracter centinela al final de la cadena
         do {
             token = verificar();//Llamando al método verificar para que devuelva el valor de token
-            //System.out.println("PRUEBA: " + token);
 
             if(token == 0){
                 System.out.println("Finalizó con éxito");
