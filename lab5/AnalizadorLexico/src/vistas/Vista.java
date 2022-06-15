@@ -1,17 +1,61 @@
 package vistas;
 
 import clases.AnalizadorLexico;
+import clases.arrayRegistros;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Jeremymr2
  */
 public class Vista extends javax.swing.JFrame {
+    String[] titulos = {"Token","Descripción","Lexema"};
+    DefaultTableModel modeloAll = new DefaultTableModel(null,titulos);
+    DefaultTableModel modeloSimb = new DefaultTableModel(null,titulos);
+    
+    Object[] registros = new Object[3];
+    
+    public void listarTablaAll(){
+        for(int i=0;i<arrayRegistros.registros.size();i++){
+            registros[0] = arrayRegistros.registros.get(i).getToken();
+            registros[1] = arrayRegistros.registros.get(i).getDescripcion();
+            registros[2] = arrayRegistros.registros.get(i).getLexema();
+            modeloAll.addRow(registros);
+        }
+        tablaAll.setModel(modeloAll);
+    }
+    
+    public void listarTablaSimb(){
+        for(int i=0;i<arrayRegistros.simbolos.size();i++){
+            registros[0] = arrayRegistros.simbolos.get(i).getToken();
+            registros[1] = arrayRegistros.simbolos.get(i).getDescripcion();
+            registros[2] = arrayRegistros.simbolos.get(i).getLexema();
+            modeloSimb.addRow(registros);
+        }
+        tablaSimbol.setModel(modeloSimb);
+    }
+    
+    public void limpiarTablaAll(){
+        if(tablaAll.getRowCount() != 0)
+            for (int i = 0; i < tablaAll.getRowCount(); i++) {
+                modeloAll.removeRow(i);
+                i -= 1;
+            }
+    }
+    
+    public void limpiarTablaSimb(){
+        if(tablaSimbol.getRowCount() != 0)
+            for (int i = 0; i < tablaSimbol.getRowCount(); i++) {
+                modeloSimb.removeRow(i);
+                i -= 1;
+            }
+    }
+    
     String cadena = "";
 
     /**
@@ -20,8 +64,9 @@ public class Vista extends javax.swing.JFrame {
     public Vista() {
         initComponents();
         setLocationRelativeTo(null);
+        listarTablaAll();
+        listarTablaSimb();
         this.setResizable(false);
-        
     }
 
     /**
@@ -37,9 +82,9 @@ public class Vista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tpCadena = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableAll = new javax.swing.JTable();
+        tablaAll = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableSimbol = new javax.swing.JTable();
+        tablaSimbol = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnLeer = new javax.swing.JButton();
@@ -52,8 +97,54 @@ public class Vista extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tpCadena);
 
-        tableAll.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -62,24 +153,57 @@ public class Vista extends javax.swing.JFrame {
             new String [] {
                 "Token", "Descripción", "Lexema"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
+        ));
+        jScrollPane2.setViewportView(tablaAll);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tableAll);
-        if (tableAll.getColumnModel().getColumnCount() > 0) {
-            tableAll.getColumnModel().getColumn(0).setResizable(false);
-            tableAll.getColumnModel().getColumn(1).setResizable(false);
-            tableAll.getColumnModel().getColumn(2).setResizable(false);
-        }
-
-        tableSimbol.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSimbol.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -88,21 +212,8 @@ public class Vista extends javax.swing.JFrame {
             new String [] {
                 "Token", "Descripción", "Lexema"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(tableSimbol);
-        if (tableSimbol.getColumnModel().getColumnCount() > 0) {
-            tableSimbol.getColumnModel().getColumn(0).setResizable(false);
-            tableSimbol.getColumnModel().getColumn(1).setResizable(false);
-            tableSimbol.getColumnModel().getColumn(2).setResizable(false);
-        }
+        ));
+        jScrollPane3.setViewportView(tablaSimbol);
 
         jLabel2.setText("TABLA QUE RECONOCE TODO");
 
@@ -191,20 +302,29 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
+        limpiarTablaSimb();
+        limpiarTablaAll();
+        
         cadena = tpCadena.getText();
+        System.out.println(cadena);
         cadena = cadena.trim();
+        System.out.println(cadena);
         cadena = cadena.replace("\n", " ");
+        System.out.println(cadena);
         if (cadena == "") {JOptionPane.showMessageDialog(null,"No hay datos que analizar","Error",JOptionPane.ERROR_MESSAGE);}
         else {
             AnalizadorLexico lex = new AnalizadorLexico(cadena);
             lex.analizar();
+            listarTablaAll();
+            listarTablaSimb();
+            arrayRegistros.registros.clear();
+            arrayRegistros.simbolos.clear();
         }
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
     private void btnLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeerActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(tpCadena);
-        
         if(seleccion == JFileChooser.APPROVE_OPTION){
             //Guardando el archivo seleccionado en file fichero
             tpCadena.setText(""); //Limpiando el textPane
@@ -270,8 +390,8 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    public javax.swing.JTable tableAll;
-    public javax.swing.JTable tableSimbol;
+    public javax.swing.JTable tablaAll;
+    public javax.swing.JTable tablaSimbol;
     private javax.swing.JTextPane tpCadena;
     // End of variables declaration//GEN-END:variables
 }

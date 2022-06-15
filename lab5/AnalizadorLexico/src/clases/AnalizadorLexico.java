@@ -1,7 +1,9 @@
 package clases;
 
 
-import clases.Tokens;
+import java.util.ArrayList;
+
+import vistas.Vista;
 
 /**
  *
@@ -9,13 +11,19 @@ import clases.Tokens;
  */
 public class AnalizadorLexico {
     String lexema, cadena;  //Lexema: buffer que irá almacenando caracteres, cadena: input del usuario
+    int iterador = 0;
     int token, indice = 0, indiceLexema = 0;    //Token: código de cada lexema, indice: iterador de la cadena, indiceLexema: iterador del lexema
     Tokens tokenList = new Tokens();
-
+    Vista vista = new Vista();  //Para usar las tablas
+    int filaAll = 0, filaSimb = 0;   //Fila de la tabla
+    
     //Constructor
+    public AnalizadorLexico(){
+    }
     public AnalizadorLexico(String cadena){
         this.cadena = cadena;
-    }
+    } 
+
     //Método que devuelve tokens de la cadena
     public int verificar() {
         int tipo = 0;   // 0: inicial | 1: letra | 2: digito
@@ -25,21 +33,28 @@ public class AnalizadorLexico {
         indiceLexema = 0;//Iterador del lexema
         for (;;) {
             car = cadena.charAt(indice);
+            System.out.println("caracter"+car);
             if(car!='#') nextCar = cadena.charAt(indice+1);
 
             if (car == '#' && indiceLexema == 0){   //Verifica si hay un # al inicio de la cadena
                 return 0;
             } else if (car == '#') {    //Verifica el # al final de la cadena
-                if (tipo == 1){ //IDENTIFICADOR
-                    if(isReservada(lexema)) return tokenList.getToken().get(lexema); //Si está en el arreglo es palabra reservada
-                    else if (lexema.length() == 1) return 1001;
-                    else if (lexema.charAt(lexema.length()-1) == '_') return 1002;    //ES CONSTRUCTOR
-                    else return 1000; //ES CADENA
-                } else if (tipo == 2) { //ENTERO
-                    if (entero) return 1003;
-                    else return 1004;
-                } else {
-                    return 911;
+                switch (tipo) {
+                    case 1 -> {
+                        //IDENTIFICADOR
+                        if(isReservada(lexema)) return tokenList.getToken().get(lexema); //Si está en el arreglo es palabra reservada
+                        else if (lexema.length() == 1) return 1001;
+                        else if (lexema.charAt(lexema.length()-1) == '_') return 1002;    //ES CONSTRUCTOR
+                        else return 1000; //ES CADENA
+                    }
+                    case 2 -> {
+                        //ENTERO
+                        if (entero) return 1003;
+                        else return 1004;
+                    }
+                    default -> {
+                            return 911;
+                    }
                 }
             } else {
                 lexema = lexema.trim();
@@ -75,6 +90,8 @@ public class AnalizadorLexico {
                             }
                         } else if (Character.isSpaceChar(car)){     
                             indice++;                       
+                        } else {
+                            return 911;
                         }
                     }
                     case 1 -> {     //LETRA
@@ -154,6 +171,9 @@ public class AnalizadorLexico {
     public void imprimir() {
         Tokens descripcion = new Tokens();
         System.out.println(token + " " + descripcion.get(token) + " " + lexema);
+        Registro r = new Registro(token, descripcion.get(token), lexema);
+        arrayRegistros.registros.add(r);
+        if (isSimbolo(lexema.charAt(0))) arrayRegistros.simbolos.add(r);
     }
 
     //Método que verifica si la palabra pertenece al arreglo de palabras reservadas
