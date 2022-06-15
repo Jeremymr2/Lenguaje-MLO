@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Jeremymr2
  */
 public class Vista extends javax.swing.JFrame {
+    String cadena = "";
     String[] titulos = {"Token","Descripción","Lexema"};
     DefaultTableModel modeloAll = new DefaultTableModel(null,titulos);
     DefaultTableModel modeloSimb = new DefaultTableModel(null,titulos);
@@ -55,8 +56,6 @@ public class Vista extends javax.swing.JFrame {
                 i -= 1;
             }
     }
-    
-    String cadena = "";
 
     /**
      * Creates new form Vista
@@ -308,6 +307,7 @@ public class Vista extends javax.swing.JFrame {
         cadena = tpCadena.getText();
         System.out.println(cadena);
         cadena = cadena.trim();
+        cadena = cadena.replaceAll("\\s{2,}", " ");
         System.out.println(cadena);
         cadena = cadena.replace("\n", " ");
         System.out.println(cadena);
